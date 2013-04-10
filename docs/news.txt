@@ -1,0 +1,7 @@
+EmailIt News
+============
+
+svn trunk
+---------
+
+* Not Yet Released

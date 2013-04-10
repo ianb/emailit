@@ -1,0 +1,30 @@
+{{py:
+url_quote = url
+url = req.params['url']
+}}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+<title>URL Sent</title>
+</head>
+
+<body>
+<h1>URL Sent</h1>
+
+<div>
+  The URL <a href="{{url}}" target="_blank">{{url}}</a> was sent to the
+  email {{if len(email_to) > 1}}addresses{{else}}address{{endif}}
+  {{for loop, email in looper(email_to)}}
+  {{if loop.last}} and {{endif}}
+  <a href="mailto:{{email|url_quote}}">{{email}}</a>{{if not loop.last}},{{endif}}
+  {{endfor}}
+</div>
+
+{{if result}}
+<div>
+  {{result|html}}
+</div>
+{{endif}}
+
+</body> </html>

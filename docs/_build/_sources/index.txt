@@ -1,0 +1,10 @@
+.. toctree::
+   :maxdepth: 1
+
+   news
+   license
+
+About EmailIt
+=============
+
+FIXME: add a description

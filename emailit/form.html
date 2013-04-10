@@ -1,0 +1,82 @@
+{{py:
+url = req.params['url']
+}}
+{{default error = ''}}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Email a URL</title>
+<style type="text/css">
+th {
+  vertical-align: top;
+  font-weight: normal;
+  width: 20%;
+  align: left;
+}
+</style>
+</head>
+
+<body>
+<h1>Email the URL {{url}}</h1>
+
+{{if error}}
+<div class="error">{{error|nl2br}}</div>
+{{endif}}
+
+<div>
+  
+Email the URL <a href="{{url}}" target="_blank">{{url}}</a>
+{{if page.title}}({{page.title}}){{endif}}
+to a friend:
+
+<form action="{{req.application_url}}" method="POST">
+
+<input type="hidden" name="url" value="{{url}}">
+
+<table width="100%">
+  <tr>
+    <th><label for="email_to">To (one email per line):</lable></th>
+    <td><textarea style="width: 100%" rows=3 name="email_to" id="email_to">{{req.params.get('email_to')}}</textarea></td>
+  </tr>
+  <tr>
+    <th><label for="name_from">From (name):</label></th>
+    <td><input type="text" name="name_from" id="name_from"
+      style="width: 100%" value="{{req.params.get('name_from')}}"></td>
+  <tr>
+    <th><label for="email_from">From (email):</label></th>
+    <td><input type="text" name="email_from" id="email_from"
+      style="width: 100%" value="{{req.params.get('email_from')}}"></td>
+  </tr>
+  <tr>
+    <th><label for="subject">Subject):</label></th>
+    <td><input type="text" name="subject" id="subject"
+      style="width: 100%" value="{{req.params.get('subject', 'I thought you would find this interesting')}}"></td>
+  </tr>
+  <tr>
+    <th colspan=2><label for="message">Include a message with the
+      page (optional):</label></th>
+  </tr>
+  <tr>
+    <td colspan=2><textarea style="width: 100%" rows=6 name="message"
+      id="message">{{req.params.get('message')}}</textarea></td>
+  </tr>
+  <tr>
+    <td colspan=2><input type="submit" value="Email the Page"></td>
+  </tr>
+</table>
+
+</form>
+
+</div>
+
+<hr>
+
+<div>
+
+  The page you requested:
+
+  <iframe src="{{url}}" width="100%" height="200"></iframe>
+
+</div>
+
+</body></html>
